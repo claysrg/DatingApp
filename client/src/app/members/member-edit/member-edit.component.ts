@@ -1,7 +1,7 @@
 import { Component, HostListener, inject, OnInit, ViewChild } from '@angular/core';
 import { Member } from '../../_models/member';
 import { AccountService } from '../../_services/account.service';
-import { MembersService } from '../../_sevices/members.service';
+import { MembersService } from '../../_services/members.service';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -22,7 +22,7 @@ export class MemberEditComponent implements OnInit {
       $event.returnValue = true;
     }
   }
-  
+
   member?: Member;
   private accountService = inject(AccountService);
   private memberService = inject(MembersService);

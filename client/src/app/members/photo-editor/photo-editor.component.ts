@@ -4,7 +4,7 @@ import { DecimalPipe, NgClass, NgFor, NgIf, NgStyle } from '@angular/common';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { AccountService } from '../../_services/account.service';
 import { environment } from '../../../environments/environment';
-import { MembersService } from '../../_sevices/members.service';
+import { MembersService } from '../../_services/members.service';
 import { Photo } from '../../_models/photo';
 
 @Component({
@@ -33,7 +33,7 @@ export class PhotoEditorComponent implements OnInit {
   deletePhoto(photo: Photo) {
     this.memberService.deletePhoto(photo).subscribe({
       next: _ => {
-        const updatedMember = {...this.member()};
+        const updatedMember = { ...this.member() };
         updatedMember.photos = updatedMember.photos.filter(p => p.id !== photo.id);
         this.memberChange.emit(updatedMember);
       }
@@ -48,7 +48,7 @@ export class PhotoEditorComponent implements OnInit {
           user.photoUrl = photo.url;
           this.accountService.setCurrentUser(user);
         }
-        const updatedMember = {...this.member()};
+        const updatedMember = { ...this.member() };
         updatedMember.photoUrl = photo.url;
         updatedMember.photos.forEach(p => {
           if (p.isMain) p.isMain = false;
@@ -60,7 +60,7 @@ export class PhotoEditorComponent implements OnInit {
     })
   }
 
-  intializeUploader() {   
+  intializeUploader() {
     this.uploader = new FileUploader({
       url: this.baseUrl + 'users/add-photo',
       authToken: 'Bearer ' + this.accountService.currentUser()?.token,
@@ -77,7 +77,7 @@ export class PhotoEditorComponent implements OnInit {
 
     this.uploader.onSuccessItem = (item, response, status, headers) => {
       const photo = JSON.parse(response);
-      const updatedMember = {...this.member()};
+      const updatedMember = { ...this.member() };
       updatedMember.photos.push(photo);
       this.memberChange.emit(updatedMember);
       if (photo.isMain) {
@@ -93,6 +93,6 @@ export class PhotoEditorComponent implements OnInit {
         });
         this.memberChange.emit(updatedMember);
       }
-    } 
+    }
   }
 }
